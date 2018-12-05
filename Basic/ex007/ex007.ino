@@ -29,8 +29,9 @@ void loop() {
 
   delay(100);
   
+  //버튼을 한번 누르면 계속 켜져있다
   if(btnRed==HIGH){
-    digitalWrite(13,HIGH);
+    digitalWrite(13,HIGH);//digitalWrite를 한번 쓰면 다음 같은 함수가 나올 때까지 지속
     digitalWrite(12,LOW);
     digitalWrite(8,LOW);
   } 
