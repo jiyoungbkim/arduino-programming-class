@@ -6,6 +6,14 @@ void loop() {
   //값의 범위를 맵핑 매개변수map(기존값, 센서최소값, 센서최대값,
   //(센서 최소값에 매칭되는)출력최대값, 출력최소값)
   int ledLight = map(light, 0, 900, 255, 0);
-  analogWrite(9, ledLight);
-  delay(500);
+  //analogWrite(9, ledLight);
+  //delay(500);
+
+  // 디지털 출력
+  if(ledLight <= 500 ){
+    digitalWrite(8, HIGH);   
+  } else {
+    digitalWrite(8, LOW);
+  }
+  
 }
