@@ -7,11 +7,15 @@ void setup() {
 }
 
 void loop() {
-  for(int i = 0; i < 120; ++i)
+  for(int i = 0; i < 180; ++i)
   {
     myservo.write(i); // 움직이고 싶은 각도
     delay(15);
   }
-  myservo.write(0);
-  delay(1000);
+  //myservo.write(0);
+  //delay(1000);
+  for(int i = 180; i >= 0; --i) {
+    myservo.write(i);
+    delay(15);
+  }
 }
