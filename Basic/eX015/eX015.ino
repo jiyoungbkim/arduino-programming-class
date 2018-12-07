@@ -1,6 +1,5 @@
 void setup() {
 }
-
 void loop() {
   int light = analogRead(A0);
   int hertz = map(light, 0, 1023, 31, 4978);
