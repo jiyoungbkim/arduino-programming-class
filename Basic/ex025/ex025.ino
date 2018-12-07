@@ -28,12 +28,6 @@ byte digits[10][7] = {
 
 int digitPos[4] = {dig1, dig2, dig3, dig4};
 
-int val = 0;
-int val4 = 0;
-int val3 = 0;
-int val2 = 0;
-int val1 = 0;
-
 int plus_btn = 13;
 int minus_btn = 12;
 
