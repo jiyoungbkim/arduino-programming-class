@@ -1,0 +1,306 @@
+#define RED 3 // RED LED 값 (1 : on / 0 : off)
+#define GREEN 4 // GREEN LED 값 (1 : on / 0 : off)
+#define CLOCK 5 // LED 값 설정 주기 
+#define BRIGHT 6 // 디스플레이 on/off 여부를 알림 (1 : off / 0 : on)
+#define RESET 7 
+#define SELECT 8 
+#define BRT_W 9 //밝기에 관한 핀
+#define BRT_CL 10 //밝기에 관한 핀
+#define BRIGHTr 13
+#define SELECTr 12 
+
+byte num_1[32] = {
+0x3, 0xC0, 0x7, 0xC0, 0xF, 0xC0, 0x1F, 0xC0,
+0x3, 0xC0, 0x3, 0xC0, 0x3, 0xC0, 0x3, 0xC0,
+0x3, 0xC0, 0x3, 0xC0, 0x3, 0xC0, 0x3, 0xC0,
+0x3, 0xC0, 0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC,
+};
+
+byte num_2[32] = {
+0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC, 0x0, 0x1C,
+0x0, 0x1C, 0x0, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC,
+0x3F, 0xFC, 0x38, 0x0, 0x38, 0x0, 0x38, 0x0,
+0x38, 0x0, 0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC
+};
+
+byte num_3[32] = {
+0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC, 0x0, 0x1C,
+0x0, 0x1C, 0x0, 0x1C, 0x0, 0x1C, 0x3F, 0xFC,
+0x3F, 0xFC, 0x3F, 0xFC, 0x0, 0x1C, 0x0, 0x1C, 
+0x0, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC
+};
+
+byte num_4[32] = {
+0x38, 0x0, 0x38, 0xE0, 0x38, 0xE0, 0x38, 0xE0,
+0x38, 0xE0, 0x38, 0xE0, 0x38, 0xE0, 0x3F, 0xFC,
+0x3F, 0xFC, 0x3F, 0xFC, 0x0, 0xE0, 0x0, 0xE0,
+0x0, 0xE0, 0x0, 0xE0, 0x0, 0xE0, 0x0, 0xE0
+};
+
+byte num_5[32] = {
+0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC, 0x38, 0x0,
+0x38, 0x0, 0x38, 0x0, 0x3F, 0xFC, 0x3F, 0xFC,
+0x3F, 0xFC, 0x0, 0x1C, 0x0, 0x1C, 0x0, 0x1C,
+0x0, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC
+};
+
+byte num_6[32] = {
+0x38, 0x0, 0x38, 0x0, 0x38, 0x0, 0x38, 0x0, 
+0x38, 0x0, 0x38, 0x0, 0x3F, 0xFC, 0x3F, 0xFC, 
+0x3F, 0xFC, 0x38, 0x1C, 0x38, 0x1C, 0x38, 0x1C,
+0x38, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC
+};
+
+byte num_7[32] = {
+0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC, 0x38, 0x1C,
+0x38, 0x1C, 0x38, 0x1C, 0x0, 0x1C, 0x0, 0x1C,
+0x0, 0x1C, 0x0, 0x1C, 0x0, 0x1C, 0x0, 0x1C,
+0x0, 0x1C, 0x0, 0x1C, 0x0, 0x1C, 0x0, 0x1C
+};
+
+byte num_8[32] = {
+0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC, 0x38, 0x1C,
+0x38, 0x1C, 0x38, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC,
+0x3F, 0xFC, 0x38, 0x1C, 0x38, 0x1C, 0x38, 0x1C,
+0x38, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC
+}; 
+
+byte num_9[32] = {
+0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC, 0x38, 0x1C,
+0x38, 0x1C, 0x38, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC,
+0x3F, 0xFC, 0x0, 0x1C, 0x0, 0x1C, 0x0, 0x1C,
+0x38, 0x1C, 0x3F, 0xFC, 0x3F, 0xFC, 0x3F, 0xFC
+}; 
+
+byte num_10[32] = {
+0x3B, 0xFC, 0x3B, 0xFC, 0x3B, 0xFC, 0x3B, 0x9C,
+0x3B, 0x9C, 0x3B, 0x9C, 0x3B, 0x9C, 0x3B, 0x9C,
+0x3B, 0x9C, 0x3B, 0x9C, 0x3B, 0x9C, 0x3B, 0x9C,
+0x3B, 0x9C, 0x3B, 0xFC, 0x3B, 0xFC, 0x3B, 0xFC
+};
+
+//LED모두다 끔
+byte _end[32] = {
+0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
+};
+
+int val = 0;
+
+
+void setup() {
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(CLOCK, OUTPUT);
+  pinMode(BRIGHT, OUTPUT);
+  pinMode(BRIGHTr, OUTPUT);
+  pinMode(RESET, OUTPUT);
+  pinMode(SELECT, OUTPUT);
+  pinMode(SELECTr, OUTPUT);
+  pinMode(BRT_W, OUTPUT);
+  pinMode(BRT_CL, OUTPUT);
+}
+
+void loop() {
+  LED_ON(num_10,40,1);
+  LED_ON_R(num_10,40,1);
+  LED_ON(num_9,40,1);
+  LED_ON_R(num_9,40,1);
+  LED_ON(num_8,40,2);
+  LED_ON_R(num_8,40,2);
+  LED_ON(num_7,40,3);
+  LED_ON_R(num_7,40,3);
+  LED_ON(num_6,40,1);
+  LED_ON_R(num_6,40,1);
+  LED_ON(num_5,20,2);
+  LED_ON_R(num_5,20,2);
+  LED_ON(num_4,20,3);
+  LED_ON_R(num_4,20,3);
+  LED_ON(num_3,10,2);
+  LED_ON_R(num_3,10,2);
+  LED_ON(num_2,10,3);
+  LED_ON_R(num_2,10,3);
+  LED_ON(num_1,10,1);
+  LED_ON_R(num_1,10,1);
+  LED_ON(_end,50,1);  
+  LED_ON_R(_end,50,1);
+}
+void LED_ON(byte *Led, int time, int select) //*LED(배열의 포인터), time(시간), select(표현색)
+{
+int a = 0;
+while(a < time){ //time이 높을수록 반복횟수가 많아짐 = 지정한 LED모양의 지속시간
+
+//도트매트릭스를 사용하기 위한 준비
+digitalWrite(RESET, HIGH);
+digitalWrite(BRIGHT, HIGH);
+digitalWrite(RESET, LOW);
+digitalWrite(BRIGHT, LOW);
+digitalWrite(SELECT, HIGH);
+
+int num=0, count=0; //num배열크기[32]를 0~32까지 증가시킴
+for(int j = 0 ; j < 16 ; j++) //LED16개 마다 BRIGHT신호를 주어야 함 총줄 16줄
+{
+digitalWrite(BRIGHT, HIGH); //16개를 사용하기전 HIGH값을 줌 시작신호
+count=0; 
+//바이너리 코드는 비트가 8개 있으므로 16개를 사용하기위에 8 X 2 두번을 돌림 
+while(count <= 1) 
+{
+for(byte mask = 10000000 ; mask > 0 ; mask >>=1) //BitMask를 하기위한 for문
+{ 
+if(select == 1) //LED를 빨간색으로 표현할떄 
+{
+if(Led[num] & mask) //포인터로 가르키는 배열의 안에 바이너리를 비교[0~31]
+{
+digitalWrite(RED,HIGH); //0이 아니면 LED_ON
+}
+else
+{
+digitalWrite(RED,LOW); //0이면 LED_OFF
+}
+digitalWrite(CLOCK,1); 
+digitalWrite(CLOCK,0);
+}
+
+if(select == 2) //LED를 녹색으로 표현할떄 
+{
+if(Led[num] & mask) //포인터로 가르키는 배열의 안에 바이너리를 비교[0~31]
+{
+digitalWrite(GREEN,HIGH);//0이 아니면 LED_ON
+}
+else
+{
+digitalWrite(GREEN,LOW); //0이면 LED_OFF
+}
+digitalWrite(CLOCK,1); 
+digitalWrite(CLOCK,0);
+}
+
+if(select == 3) //LED를 빨간색+녹색(주황색) 으로 표현할떄 
+{
+if(Led[num] & mask) //포인터로 가르키는 배열의 안에 바이너리를 비교[0~31]
+{
+//0이 아니면 LED_ON
+digitalWrite(RED,HIGH); 
+digitalWrite(GREEN,HIGH);
+}
+else
+{
+//0이면 LED_OFF
+digitalWrite(RED,LOW); 
+digitalWrite(GREEN,LOW);
+}
+digitalWrite(CLOCK,1); 
+digitalWrite(CLOCK,0);
+}
+}
+num++; //배열이름[32]안에 있는 내용을 가져오기 위해서 0번지부터 31번지까지 바이너리 값을
+//가져오게 함 번지수를 늘려줌
+count++; //while를 2번돌기 위한 카운트증가
+}
+
+digitalWrite(BRIGHT, LOW); //16개의 LED를 제어했으면 BRIGHT LOW
+
+for(int k = 0 ; k < 48 ; k++) //켜진 LED의 밝기를 증가
+{
+digitalWrite(BRT_W, HIGH);
+digitalWrite(BRT_CL, HIGH);
+digitalWrite(BRT_CL, LOW);
+digitalWrite(BRT_W, LOW);
+}
+
+}
+digitalWrite(SELECT, LOW);
+a++;//지속시간에 관련된 변수
+}
+}
+
+void LED_ON_R(byte *Led, int time, int select) //*LED(배열의 포인터), time(시간), select(표현색)
+{
+int a = 0;
+while(a < time){ //time이 높을수록 반복횟수가 많아짐 = 지정한 LED모양의 지속시간
+
+//도트매트릭스를 사용하기 위한 준비
+digitalWrite(RESET, HIGH);
+digitalWrite(BRIGHTr, HIGH);
+digitalWrite(RESET, LOW);
+digitalWrite(BRIGHTr, LOW);
+digitalWrite(SELECTr, HIGH);
+
+int num=0, count=0; //num배열크기[32]를 0~32까지 증가시킴
+for(int j = 0 ; j < 16 ; j++) //LED16개 마다 BRIGHT신호를 주어야 함 총줄 16줄
+{
+digitalWrite(BRIGHTr, HIGH); //16개를 사용하기전 HIGH값을 줌 시작신호
+count=0; 
+//바이너리 코드는 비트가 8개 있으므로 16개를 사용하기위에 8 X 2 두번을 돌림 
+while(count <= 1) 
+{
+for(byte mask = 10000000 ; mask > 0 ; mask >>=1) //BitMask를 하기위한 for문
+{ 
+if(select == 1) //LED를 빨간색으로 표현할떄 
+{
+if(Led[num] & mask) //포인터로 가르키는 배열의 안에 바이너리를 비교[0~31]
+{
+digitalWrite(RED,HIGH); //0이 아니면 LED_ON
+}
+else
+{
+digitalWrite(RED,LOW); //0이면 LED_OFF
+}
+digitalWrite(CLOCK,1); 
+digitalWrite(CLOCK,0);
+}
+
+if(select == 2) //LED를 녹색으로 표현할떄 
+{
+if(Led[num] & mask) //포인터로 가르키는 배열의 안에 바이너리를 비교[0~31]
+{
+digitalWrite(GREEN,HIGH);//0이 아니면 LED_ON
+}
+else
+{
+digitalWrite(GREEN,LOW); //0이면 LED_OFF
+}
+digitalWrite(CLOCK,1); 
+digitalWrite(CLOCK,0);
+}
+
+if(select == 3) //LED를 빨간색+녹색(주황색) 으로 표현할떄 
+{
+if(Led[num] & mask) //포인터로 가르키는 배열의 안에 바이너리를 비교[0~31]
+{
+//0이 아니면 LED_ON
+digitalWrite(RED,HIGH); 
+digitalWrite(GREEN,HIGH);
+}
+else
+{
+//0이면 LED_OFF
+digitalWrite(RED,LOW); 
+digitalWrite(GREEN,LOW);
+}
+digitalWrite(CLOCK,1); 
+digitalWrite(CLOCK,0);
+}
+}
+num++; //배열이름[32]안에 있는 내용을 가져오기 위해서 0번지부터 31번지까지 바이너리 값을
+//가져오게 함 번지수를 늘려줌
+count++; //while를 2번돌기 위한 카운트증가
+}
+
+digitalWrite(BRIGHTr, LOW); //16개의 LED를 제어했으면 BRIGHT LOW
+
+for(int k = 0 ; k < 48 ; k++) //켜진 LED의 밝기를 증가
+{
+digitalWrite(BRT_W, HIGH);
+digitalWrite(BRT_CL, HIGH);
+digitalWrite(BRT_CL, LOW);
+digitalWrite(BRT_W, LOW);
+}
+
+}
+digitalWrite(SELECTr, LOW);
+a++;//지속시간에 관련된 변수
+}
+}
