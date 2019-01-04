@@ -1,13 +1,13 @@
-#define RED 3 // RED LED 값 (1 : on / 0 : off)
-#define GREEN 4 // GREEN LED 값 (1 : on / 0 : off)
-#define CLOCK 5 // LED 값 설정 주기 
-#define BRIGHT 6 // 디스플레이 on/off 여부를 알림 (1 : off / 0 : on)
-#define RESET 7 
-#define SELECT 8 
+#define RED 1 // RED LED 값 (1 : on / 0 : off)
+#define GREEN 2 // GREEN LED 값 (1 : on / 0 : off)
+#define CLOCK 3 // LED 값 설정 주기 
+#define BRIGHT 4 // 디스플레이 on/off 여부를 알림 (1 : off / 0 : on)
+#define RESET 5 
+#define SELECT 0 
 #define BRT_W 9 //밝기에 관한 핀
 #define BRT_CL 10 //밝기에 관한 핀
-#define BRIGHTd 13
-#define SELECTd 12
+#define BRIGHTd 6
+#define SELECTd 7
 
 byte heartF_1[32] = {
 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 
@@ -203,8 +203,6 @@ byte cut_13[32] = {
 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
 };
 
-
-
 void setup() {
   pinMode(RED, OUTPUT);
   pinMode(GREEN, OUTPUT);
@@ -216,7 +214,6 @@ void setup() {
   pinMode(SELECTd, OUTPUT);
   pinMode(BRT_W, OUTPUT);
   pinMode(BRT_CL, OUTPUT);
-
 }
 
 void loop() {
@@ -245,15 +242,32 @@ void loop() {
   LED_ON(heartF_1, 5, 1);
   LED_ON(heartF_2, 5, 3);
   LED_ON(heartF_3, 5, 2);
-  LED_ON(heartF_4, 5, 1);
-
-  
+  LED_ON(heartF_4, 5, 1); 
   LED_ON(heart_2, 5, 1);
   LED_ON(heart_3, 5, 1);
   LED_ON(heart_4, 5, 1);
-  LED_ON(heart_5, 5, 1);
-  
-  LED_ON(_end, 30, 1);
+  LED_ON(heart_5, 5, 1);  
+  LED_ON(_end, 5, 1);
+
+  LED_ON(heartF_1, 3, 1);
+  LED_ON(heartF_2, 3, 3);
+  LED_ON(heartF_3, 3, 2);
+  LED_ON(heartF_4, 3, 1); 
+  LED_ON(heart_2, 3, 1);
+  LED_ON(heart_3, 3, 1);
+  LED_ON(heart_4, 3, 1);
+  LED_ON(heart_5, 3, 1);  
+  LED_ON(_end, 5, 1);
+
+  LED_ON(heartF_1, 3, 1);
+  LED_ON(heartF_2, 3, 3);
+  LED_ON(heartF_3, 3, 2);
+  LED_ON(heartF_4, 3, 1); 
+  LED_ON(heart_2, 3, 1);
+  LED_ON(heart_3, 3, 1);
+  LED_ON(heart_4, 3, 1);
+  LED_ON(heart_5, 3, 1);  
+  LED_ON(_end, 5, 1);
 
 }
 void LED_ON(byte *Led, int time, int select) //*LED(배열의 포인터), time(시간), select(표현색)
@@ -344,7 +358,7 @@ digitalWrite(SELECT, LOW);
 a++;//지속시간에 관련된 변수
 }
 }
-
+// 아래쪽 매트릭스 함수
 void LED_ON_D(byte *Led, int time, int select) //*LED(배열의 포인터), time(시간), select(표현색)
 {
 int a = 0;
