@@ -3,11 +3,12 @@
 #define CLOCK 3 // LED 값 설정 주기 
 #define BRIGHT 4 // 디스플레이 on/off 여부를 알림 (1 : off / 0 : on)
 #define RESET 5 
-#define SELECT 0 
+#define SELECT 0
 #define BRT_W 9 //밝기에 관한 핀
 #define BRT_CL 10 //밝기에 관한 핀
 #define BRIGHTd 6
 #define SELECTd 7
+#define FLAG 13
 
 byte heartF_1[32] = {
 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 
@@ -229,6 +230,7 @@ void setup() {
   pinMode(SELECTd, OUTPUT);
   pinMode(BRT_W, OUTPUT);
   pinMode(BRT_CL, OUTPUT);
+  pinMode(FLAG, INPUT);
   
   // 삼색 LED 셋업
   pinMode(SER_Pin, OUTPUT);
@@ -270,6 +272,8 @@ void setRegisterPin(int index, int value){
 } 
 
 void loop() {
+  int start = digitalRead(FLAG);
+  if(start==HIGH){
   LED_ON_D(cut_1, 3, 3);
   LED_ON_D(cut_2, 3, 3);
   LED_ON_D(cut_3, 3, 3);
@@ -386,7 +390,7 @@ void loop() {
     setColor2(0,0,1);
     writeRegisters();
     delay(200);
-    setColor3(0,1,0);
+    /*setColor3(0,1,0);
     writeRegisters();
     delay(200);
     setColor4(1,0,0);
@@ -394,7 +398,7 @@ void loop() {
     delay(200);
     setColor5(0,0,1);
     writeRegisters();
-    delay(200);
+    delay(200);*/
 
     setColor1(1, 1, 1); 
     writeRegisters();
@@ -415,7 +419,7 @@ void loop() {
     setColor5(1, 1, 1); 
     writeRegisters();
     delay(200);
-  
+  }
 }
 // 도트 매트릭스 실행 함수
 void LED_ON(byte *Led, int time, int select) //*LED(배열의 포인터), time(시간), select(표현색)
